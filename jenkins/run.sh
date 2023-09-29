@@ -7,4 +7,4 @@ FILE_NAME=$1
 cd ./gcp/main
 # Excetute terraform script
 terraform init -upgrade
-terraform apply -var="file_name=$FILE_NAME"
+terraform apply -var="file_name=$FILE_NAME" -auto-approve

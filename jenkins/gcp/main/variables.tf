@@ -1,7 +1,7 @@
 # LOCAL CONFIG
 
 module "vars" {
-  source   = "../env"
+  source   = "../var"
   file_name = var.file_name
 }
 
