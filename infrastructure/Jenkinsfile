@@ -1,0 +1,66 @@
+pipeline {
+    agent any  
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build your Java application
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                // Run unit tests (assuming Maven)
+                sh 'mvn test'
+            }
+        }
+
+        stage('Static Code Analysis - SonarQube') {
+            steps {
+                // Run SonarQube analysis
+                withSonarQubeEnv('SonarQube Server') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+
+        stage('Security Scanning - Checkov') {
+            steps {
+                // Install and run Checkov (for infrastructure-as-code scanning)
+                sh 'pip install checkov'
+                sh 'checkov -d /path/to/your/infrastructure/code'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Deploy your Java application to a specific environment
+                // You might use a deployment script or tool here
+                sh './deploy.sh'
+            }
+        }
+    }
+
+    post {
+        success {
+            // Notify on successful build and deployment
+            slackSend(channel: '#general', color: 'good', message: 'Pipeline succeeded!')
+        }
+
+        failure {
+            // Notify on pipeline failure
+            slackSend(channel: '#general', color: 'danger', message: 'Pipeline failed!')
+        }
+
+        always {
+        // Clean up or perform any necessary post-build actions
+        }
+    }
+}
