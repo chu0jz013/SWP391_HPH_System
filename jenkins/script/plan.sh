@@ -4,7 +4,7 @@ set -a # Enable automatic exporting of variables
 
 FILE_NAME=$1
 
-cd ./gcp/main
-
+cd ./jenkins/gcp/main
 # Excetute terraform script
-terraform destroy -var="file_name=$FILE_NAME"
+terraform init -upgrade
+terraform plan -var="file_name=$FILE_NAME" 
