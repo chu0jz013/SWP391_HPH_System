@@ -5,6 +5,12 @@ terraform {
       version = "3.51.0"
     }
   }
+
+  backend "gcs" {
+    bucket      = "haikn-jenkins-backend"
+    prefix      = "terraform/state"
+  }
+
 }
 
 provider "google" {
