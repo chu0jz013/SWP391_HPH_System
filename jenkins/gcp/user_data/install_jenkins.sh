@@ -50,3 +50,11 @@ sudo docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p
 sudo curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 sudo chmod 700 get_helm.sh
 ./get_helm.sh
+
+##########################
+## install tfenv
+##########################
+
+git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+echo "export PATH=\"$HOME/.tfenv/bin:$PATH\"" >>~/.bashrc
+export PATH="$HOME/.tfenv/bin:$PATH"
