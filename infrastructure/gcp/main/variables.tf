@@ -17,5 +17,5 @@ variable "file_name" {
 }
 
 variable "credentials_file_path" {
-  default = "/home/haikn/key.json"
+  # default = "/home/haikn/key.json"
 }
