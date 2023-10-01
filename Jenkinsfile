@@ -6,6 +6,8 @@ pipeline {
     }
 
     environment {
+        PROJECT_ID = 'knhfrdevops'
+        REGION = 'asia-east2'
         TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
     }
@@ -32,6 +34,7 @@ pipeline {
                     sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                     sh 'pwd'
                     sh 'ls -l'
+                    sh "gsutil ls -p ${PROJECT_ID} -l ${REGION}"
                     sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
                 }
             }
