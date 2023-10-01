@@ -16,16 +16,15 @@ pipeline {
         stage('Install Terraform') {
           steps {
             script {
-              if (!fileExists("${/var/lib/jenkins}/.tfenv")) { 
-                sh 'git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
-              }
-              sh 'echo "export PATH=\"$HOME/.tfenv/bin:$PATH\"" >>~/.bashrc'
-              sh 'export PATH="$HOME/.tfenv/bin:$PATH"'
-
-              sh 'tfenv --version'
-              sh "tfenv install ${TERRAFORM_VERSION}"
-              sh "tfenv use ${TERRAFORM_VERSION}"
-            }
+                if (!fileExists("${/var/lib/jenkins}/.tfenv")) {
+                    sh 'git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
+                }
+                sh 'echo "export PATH=\"$HOME/.tfenv/bin:$PATH\"" >>~/.bashrc'
+                sh 'export PATH="$HOME/.tfenv/bin:$PATH"'
+                
+                sh 'tfenv --version'
+                sh "tfenv install ${TERRAFORM_VERSION}"
+                sh "tfenv use ${TERRAFORM_VERSION}"
           }
         }
 
