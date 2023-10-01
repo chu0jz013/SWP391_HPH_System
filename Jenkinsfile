@@ -32,7 +32,7 @@ pipeline {
                 sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 sh 'pwd'
                 sh 'ls -l'
-                withCredemtials([file(credentialsId: 'gcloud-creds')]) {
+                withCredentials([file(credentialsId: 'gcloud-creds')]) {
                     sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
                 }
             }
