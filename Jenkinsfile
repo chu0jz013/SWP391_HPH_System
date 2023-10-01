@@ -29,13 +29,14 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
+                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]) {
                     sh 'gcloud --version'
-                    // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
+                    sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                     sh 'pwd'
                     sh 'ls -l'
                     sh 'gcloud storage buckets list --project=${PROJECT_ID}'
-                    sh 'gsutil  cp -r  gs://haikn-infras-backend /home/haikn/'
                     sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
+                }
             }
         }
 

@@ -5,10 +5,10 @@ terraform {
       version = "3.51.0"
     }
   }
-  backend "gcs" {
-    bucket = "haikn-infras-backend"
-    prefix = "terraform/state"
-  }
+  # backend "gcs" {
+  #   bucket = "haikn-infras-backend"
+  #   prefix = "terraform/state"
+  # }
 }
 
 provider "google" {
