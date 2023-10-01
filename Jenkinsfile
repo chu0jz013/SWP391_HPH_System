@@ -31,10 +31,9 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 sh 'gcloud --version'
-                sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
+                // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 sh 'pwd'
                 sh 'ls -l'
-                sh 'gsutil mb -c standard -l asia-east2 gs://haikn-testaasdasdf2f2222222222222'
                 sh 'gcloud storage buckets list --project=${PROJECT_ID}'
                 sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
             }
