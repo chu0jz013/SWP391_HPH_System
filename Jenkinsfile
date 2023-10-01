@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         TERRAFORM_VERSION = '1.5.7'
-        ENV_SYSTEM = 'SIT'
+        ENV_SYSTEM = 'sit'
     }
 
     stages {
