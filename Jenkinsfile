@@ -34,7 +34,7 @@ pipeline {
                     sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                     sh 'pwd'
                     sh 'ls -l'
-                    sh 'gcloud storage buckets list --project=${PROJECT_ID} --location=${REGION}'
+                    sh 'gcloud storage buckets list --project=${PROJECT_ID}'
                     sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
                 }
             }
