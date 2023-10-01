@@ -13,7 +13,7 @@ pipeline {
           }
         }
 
-        stage('Install Terraform') {
+        stage('Install tfenv') {
           steps {
             sh' git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
             sh ' echo "export PATH=\"$HOME/.tfenv/bin:$PATH\"" >>~/.bashrc'
