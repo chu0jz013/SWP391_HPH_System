@@ -55,6 +55,6 @@ sudo chmod 700 get_helm.sh
 ## install tfenv
 ##########################
 
-git clone https://github.com/tfutils/tfenv.git ~/.tfenv
-echo "export PATH=\"$HOME/.tfenv/bin:$PATH\"" >>~/.bashrc
+sudo git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+sudo echo "export PATH=\"$HOME/.tfenv/bin:$PATH\"" >>~/.bashrc
 export PATH="$HOME/.tfenv/bin:$PATH"

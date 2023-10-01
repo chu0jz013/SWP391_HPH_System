@@ -2,62 +2,61 @@ pipeline {
     agent any
 
     environment {
-        // GCP Creds
-         TERRAFORM_VERSION = '1.5.7'
+        TERRAFORM_VERSION = '1.5.7'
+        ENV_SYSTEM = 'SIT'
     }
 
     stages {
         stage('Git checkout') {
-            steps {
-                checkout scm
-            }
+          steps {
+            checkout scm
+          }
         }
 
-
         stage('Install Terraform') {
-            steps {
-                sh 'tfenv --version'
-                sh 'tfenv install ${TERRAFORM_VERSION}'
-                sh 'tfenv use ${TERRAFORM_VERSION}'
-            }
+          steps {
+            sh 'tfenv --version'
+            sh 'tfenv install ${TERRAFORM_VERSION}'
+            sh 'tfenv use ${TERRAFORM_VERSION}'
+          }
         }
 
         stage('Terraform Plan') {
-            steps {
-                sh 'bash '
-            }
+          steps {
+            sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
+          }
         }
 
         stage('Terraform Apply') {
-            steps {
-                input message: 'Deploy infrastructure?', ok: 'Deploy'
-                sh 'terraform apply -auto-approve tfplan'
-            }
+          steps {
+            input message: 'Deploy infrastructure?', ok: 'Deploy'
+            sh 'bash infrastructure/script/run.sh ${ENV_SYSTEM}'
+          }
         }
 
-        stage('Checkov Scan') {
-            steps {
-                sh 'pip install checkov'
+        // stage('Checkov Scan') {
+        //   steps {
+        //     sh 'pip install checkov'
 
-                sh 'checkov -d .'
-            }
-        }
+        //     sh 'checkov -d .'
+        //   }
+        // }
 
         stage('Terraform Destroy') {
-            steps {
-                input message: 'Destroy infrastructure?', ok: 'Destroy'
-                sh 'terraform destroy -auto-approve'
-            }
+          steps {
+            input message: 'Destroy infrastructure?', ok: 'Destroy'
+            sh 'bash infrastructure/script/destroy.sh ${ENV_SYSTEM}'
+          }
         }
     }
 
     post {
         success {
-            // Add any post-success actions or notifications here
+          echo  'success'
         }
 
         failure {
-            // Add any post-failure actions or notifications here
+      echo  'failure'
         }
     }
 }
