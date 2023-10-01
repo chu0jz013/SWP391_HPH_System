@@ -1,9 +1,8 @@
 terraform {
   required_providers {
     google = {
-      credentials = file(var.credentials_file_path)
-      source      = "hashicorp/google"
-      version     = "3.51.0"
+      source  = "hashicorp/google"
+      version = "3.51.0"
     }
   }
   backend "gcs" {
@@ -13,6 +12,7 @@ terraform {
 }
 
 provider "google" {
+  credentials = file(var.credentials_file_path)
   project = "knhfrdevops"
   region  = "asia-east2"
   zone    = "asia-east2-a"
