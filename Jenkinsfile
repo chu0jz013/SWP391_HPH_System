@@ -1,19 +1,28 @@
 pipeline {
     agent any
 
-    tools{
+    tools {
         terraform 'my-terraform'
     }
 
     environment {
         TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
+        GCLOUD_CREDS = credentials('gcloud-creds')
     }
 
     stages {
         stage('Git checkout') {
             steps {
                 checkout scm
+            }
+        }
+
+        stage('Get gclod credentials') {
+            steps {
+                sh 'gcloud --version'
+                sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
+                sh 'gcloud compute zones list'
             }
         }
 
