@@ -35,6 +35,7 @@ pipeline {
                     sh 'pwd'
                     sh 'ls -l'
                     sh 'gcloud storage buckets list --project=${PROJECT_ID}'
+                    sh 'gsutil cp gs://haikn-infras-backend'
                     sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
                 }
             }
