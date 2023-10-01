@@ -15,6 +15,14 @@ pipeline {
 
         stage('Install Terraform') {
           steps {
+            sh' git clone https://github.com/tfutils/tfenv.git ~/.tfenv'
+            sh ' echo "export PATH=\"$HOME/.tfenv/bin:$PATH\"" >>~/.bashrc'
+            sh 'export PATH="$HOME/.tfenv/bin:$PATH"'
+          }
+        }
+
+        stage('Install Terraform') {
+          steps {
             sh 'tfenv --version'
             sh 'tfenv install ${TERRAFORM_VERSION}'
             sh 'tfenv use ${TERRAFORM_VERSION}'
@@ -48,7 +56,7 @@ pipeline {
             sh 'bash infrastructure/script/destroy.sh ${ENV_SYSTEM}'
           }
         }
-    }
+                }
 
     // post {
     //     success {
@@ -59,4 +67,4 @@ pipeline {
     //   echo  'failure'
     //     }
     // }
-}
+    }
