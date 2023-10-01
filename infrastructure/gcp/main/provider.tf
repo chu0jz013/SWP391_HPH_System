@@ -1,8 +1,9 @@
 terraform {
   required_providers {
     google = {
-      source  = "hashicorp/google"
-      version = "3.51.0"
+      credentials = file(var.credentials_file_path)
+      source      = "hashicorp/google"
+      version     = "3.51.0"
     }
   }
   backend "gcs" {
