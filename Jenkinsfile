@@ -20,6 +20,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 sh 'pwd'
+                sh 'ls -l'
                 sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
             }
         }
