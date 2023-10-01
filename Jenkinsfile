@@ -19,6 +19,7 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
+                sh 'pwd'
                 sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
             }
         }
