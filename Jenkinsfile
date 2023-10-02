@@ -39,14 +39,23 @@ pipeline {
             }
         }
 
-        stage('Terraform Scan with Checkov') {
-            agent {
-                docker {
-                    image 'bridgecrew/checkov'
-                }
-            }
+        // stage('Terraform Scan with Checkov') {
+        //     agent {
+        //         docker {
+        //             image 'bridgecrew/checkov'
+        //         }
+        //     }
+        //     steps {
+        //         sh 'checkov -f checkov_results.json'
+        //     }
+        // }
+
+        stage('Terraform Scan with TFsec') {
             steps {
-                sh 'checkov -f checkov_results.json'
+                sh 'docker run --rm -it -v "$(pwd):/src" aquasec/tfsec /src'
+                sh 'docker run --tty --rm --volume ${pwd}:/tf --workdir /tf bridgecrew/checkov --directory /tf'
+                // sh 'go get install github.com/aquasecurity/tfsec/cmd/tfsec@latest'
+                // sh 'checkov -f checkov_results.json'
             }
         }
 

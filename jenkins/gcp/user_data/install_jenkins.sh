@@ -55,4 +55,10 @@ sudo chmod 700 get_helm.sh
 ## install pip
 ##########################
 
-sudo apt install pip
+sudo apt install pip -y
+
+##########################
+## install go
+##########################
+
+sudo apt install golang-go -y
