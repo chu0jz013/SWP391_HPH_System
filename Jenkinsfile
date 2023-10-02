@@ -45,7 +45,7 @@ pipeline {
             agent {
                 docker {
                     image 'bridgecrew/checkov'
-                    args '--volume infrastructure/gcp/main/checkov_results.json:/tf --workdir /tf'
+                    args '--volume infrastructure/gcp/main:/tf --workdir /tf'
                 }
             }
             steps {
