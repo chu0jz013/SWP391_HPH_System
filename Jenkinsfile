@@ -10,7 +10,7 @@ pipeline {
         REGION = 'asia-east2'
         // TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
-        FILE_PATH = '.credentials/gcloud-creds.json'
+        FILE_PATH = '/var/lib/jenkins/workspace/SWP391_HPH_System_main@tmp/secretFiles/f3855b0d-4c7e-4043-a660-6906ae913096/knhfrdevops-88350ee9f3bb.json'
         GCLOUD_CREDS = credentials('gcloud-creds')
     }
 
@@ -25,12 +25,14 @@ pipeline {
             steps {
                 sh 'gcloud --version'
 
-                script {
-                    if (!fileExists(FILE_PATH)) {
-                        writeFile(FILE_PATH, GCLOUD_CREDS)
-                        echo "Text copied to $FILE_PATH"
-                    }
-                }
+                sh 'echo $GCLOUD_CREDS'
+
+                // script {
+                //     if (!fileExists(FILE_PATH)) {
+                //         writeFile(FILE_PATH, GCLOUD_CREDS)
+                //         echo "Text copied to $FILE_PATH"
+                //     }
+                // }
 
                 sh "gcloud auth application-default login --client-id-file=$FILE_PATH --quiet"
                 sh 'gcloud auth application-default print-access-token'
