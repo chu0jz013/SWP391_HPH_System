@@ -14,7 +14,7 @@ pipeline {
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
         GOOGLE_PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
-        TF_PATH = '/var/lib/jenkins/workspace/SWP391_HPH_System_main'
+        TF_PATH = '/var/lib/jenkins/workspace/SWP391_HPH_System_main/infrastructure/gcp/main'
     }
 
     stages {
@@ -45,12 +45,12 @@ pipeline {
             agent {
                 docker {
                     image 'bridgecrew/checkov'
-                    args '--volume $TF_PATH/infrastructure/gcp/main:/tf --workdir /tf'
+                    args '--volume $TF_PATH:/tf --workdir /tf'
                 }
             }
             steps {
                 script {
-                    sh 'checkov -f /tf/infrastructure/gcp/main/checkov_results.json'
+                    sh 'checkov -f /tf/checkov_results.json'
                 }
             }
         }
