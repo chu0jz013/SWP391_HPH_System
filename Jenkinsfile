@@ -11,6 +11,8 @@ pipeline {
         // TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
         GCLOUD_CREDS = credentials('gcloud-creds')
+        FILE_PATH = '.credentials/gcloud-creds.json'
+        TEXT_TO_COPY = env.GCLOUD_CREDS
     }
 
     stages {
@@ -24,20 +26,16 @@ pipeline {
             steps {
                 sh 'gcloud --version'
 
-                def file_path = '.credentials/gcloud-creds.json'
-                def text_to_copy = env.GCLOUD_CREDS
-
                 script {
-                    if (!fileExists(file_path)) {
-                        writeFile(file_path, text_to_copy)
-                        echo "Text copied to $file_path"
+                    if (!fileExists($FILE_PATH)) {
+                        writeFile($FILE_PATH, TEXT_TO_COPY)
+                        echo "Text copied to $FILE_PATH"
                     }
                 }
 
-                sh "gcloud auth application-default login --client-id-file=$file_path --quiet"
+                sh "gcloud auth application-default login --client-id-file=$FILE_PATH --quiet"
                 sh 'gcloud auth application-default print-access-token'
             }
-
         }
 
         stage('Terraform Plan') {
