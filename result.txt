@@ -1,0 +1,160 @@
+
+       _               _              
+   ___| |__   ___  ___| | _______   __
+  / __| '_ \ / _ \/ __| |/ / _ \ \ / /
+ | (__| | | |  __/ (__|   < (_) \ V / 
+  \___|_| |_|\___|\___|_|\_\___/ \_/  
+                                      
+By bridgecrew.io | version: 2.4.59 
+
+terraform_plan scan results:
+
+Passed checks: 14, Failed checks: 23, Skipped checks: 0
+
+Check: CKV_GCP_18: "Ensure GKE Control Plane is not public"
+	PASSED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-10.html
+Check: CKV_GCP_19: "Ensure GKE basic auth is disabled"
+	PASSED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-11.html
+Check: CKV_GCP_1: "Ensure Stackdriver Logging is set to Enabled on Kubernetes Engine Clusters"
+	PASSED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-1.html
+Check: CKV_GCP_7: "Ensure Legacy Authorization is set to Disabled on Kubernetes Engine Clusters"
+	PASSED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-2.html
+Check: CKV_GCP_8: "Ensure Stackdriver Monitoring is set to Enabled on Kubernetes Engine Clusters"
+	PASSED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-3.html
+Check: CKV_GCP_72: "Ensure Integrity Monitoring for Shielded GKE Nodes is Enabled"
+	PASSED for resource: module.gke["gke"].google_container_node_pool.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/ensure-integrity-monitoring-for-shielded-gke-nodes-is-enabled.html
+Check: CKV_GCP_3: "Ensure Google compute firewall ingress does not allow unrestricted rdp access"
+	PASSED for resource: module.vpc["vpc"].google_compute_firewall.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-networking-policies/bc-gcp-networking-2.html
+Check: CKV_GCP_2: "Ensure Google compute firewall ingress does not allow unrestricted ssh access"
+	PASSED for resource: module.vpc["vpc"].google_compute_firewall.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-networking-policies/bc-gcp-networking-1.html
+Check: CKV_GCP_77: "Ensure Google compute firewall ingress does not allow on ftp port"
+	PASSED for resource: module.vpc["vpc"].google_compute_firewall.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-networking-policies/ensure-gcp-google-compute-firewall-ingress-does-not-allow-ftp-port-20-access.html
+Check: CKV_GCP_88: "Ensure Google compute firewall ingress does not allow unrestricted mysql access"
+	PASSED for resource: module.vpc["vpc"].google_compute_firewall.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-networking-policies/ensure-gcp-compute-firewall-ingress-does-not-allow-unrestricted-mysql-access.html
+Check: CKV_GCP_106: "Ensure Google compute firewall ingress does not allow unrestricted http port 80 access"
+	PASSED for resource: module.vpc["vpc"].google_compute_firewall.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-networking-policies/ensure-gcp-google-compute-firewall-ingress-does-not-allow-unrestricted-http-port-80-access.html
+Check: CKV_GCP_75: "Ensure Google compute firewall ingress does not allow unrestricted FTP access"
+	PASSED for resource: module.vpc["vpc"].google_compute_firewall.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-networking-policies/ensure-gcp-google-compute-firewall-ingress-does-not-allow-unrestricted-ftp-access.html
+Check: CKV_GCP_74: "Ensure that private_ip_google_access is enabled for Subnet"
+	PASSED for resource: module.vpc["vpc"].google_compute_subnetwork.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-general-policies/ensure-gcp-subnet-has-a-private-ip-google-access.html
+Check: CKV2_GCP_19: "Ensure GCP Kubernetes engine clusters have 'alpha cluster' feature disabled"
+	PASSED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+Check: CKV_GCP_64: "Ensure clusters are created with Private Nodes"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/ensure-clusters-are-created-with-private-nodes.html
+Check: CKV_GCP_61: "Enable VPC Flow Logs and Intranode Visibility"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/enable-vpc-flow-logs-and-intranode-visibility.html
+Check: CKV_GCP_66: "Ensure use of Binary Authorization"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/ensure-use-of-binary-authorization.html
+Check: CKV_GCP_25: "Ensure Kubernetes Cluster is created with Private cluster enabled"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-6.html
+Check: CKV_GCP_69: "Ensure the GKE Metadata Server is Enabled"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/ensure-the-gke-metadata-server-is-enabled.html
+Check: CKV_GCP_23: "Ensure Kubernetes Cluster is created with Alias IP ranges enabled"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-15.html
+Check: CKV_GCP_12: "Ensure Network Policy is enabled on Kubernetes Engine Clusters"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-7.html
+Check: CKV_GCP_65: "Manage Kubernetes RBAC users with Google Groups for GKE"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/manage-kubernetes-rbac-users-with-google-groups-for-gke.html
+Check: CKV_GCP_21: "Ensure Kubernetes Clusters are configured with Labels"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-13.html
+Check: CKV_GCP_24: "Ensure PodSecurityPolicy controller is enabled on the Kubernetes Engine Clusters"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-9.html
+Check: CKV_GCP_71: "Ensure Shielded GKE Nodes are Enabled"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/ensure-shielded-gke-nodes-are-enabled.html
+Check: CKV_GCP_13: "Ensure client certificate authentication to Kubernetes Engine Clusters is disabled"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-8.html
+Check: CKV_GCP_70: "Ensure the GKE Release Channel is set"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/ensure-the-gke-release-channel-is-set.html
+Check: CKV_GCP_20: "Ensure master authorized networks is set to enabled in GKE clusters"
+	FAILED for resource: module.gke["gke"].google_container_cluster.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-12.html
+Check: CKV_GCP_9: "Ensure 'Automatic node repair' is enabled for Kubernetes Clusters"
+	FAILED for resource: module.gke["gke"].google_container_node_pool.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-4.html
+Check: CKV_GCP_69: "Ensure the GKE Metadata Server is Enabled"
+	FAILED for resource: module.gke["gke"].google_container_node_pool.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/ensure-the-gke-metadata-server-is-enabled.html
+Check: CKV_GCP_22: "Ensure Container-Optimized OS (cos) is used for Kubernetes Engine Clusters Node image"
+	FAILED for resource: module.gke["gke"].google_container_node_pool.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-14.html
+Check: CKV_GCP_10: "Ensure 'Automatic node upgrade' is enabled for Kubernetes Clusters"
+	FAILED for resource: module.gke["gke"].google_container_node_pool.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/bc-gcp-kubernetes-5.html
+Check: CKV_GCP_68: "Ensure Secure Boot for Shielded GKE Nodes is Enabled"
+	FAILED for resource: module.gke["gke"].google_container_node_pool.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-kubernetes-policies/ensure-secure-boot-for-shielded-gke-nodes-is-enabled.html
+Check: CKV_GCP_26: "Ensure that VPC Flow Logs is enabled for every subnet in a VPC Network"
+	FAILED for resource: module.vpc["vpc"].google_compute_subnetwork.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/logging-policies-1/bc-gcp-logging-1.html
+Check: CKV_GCP_76: "Ensure that Private google access is enabled for IPV6"
+	FAILED for resource: module.vpc["vpc"].google_compute_subnetwork.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-networking-policies/ensure-gcp-private-google-access-is-enabled-for-ipv6.html
+Check: CKV2_GCP_18: "Ensure GCP network defines a firewall and does not use the default firewall"
+	FAILED for resource: module.vpc["vpc"].google_compute_network.this
+	File: /checkov_results.json:0-0
+Check: CKV2_GCP_12: "Ensure GCP compute firewall ingress does not allow unrestricted access to all ports"
+	FAILED for resource: module.vpc["vpc"].google_compute_firewall.this
+	File: /checkov_results.json:0-0
+	Guide: https://docs.paloaltonetworks.com/content/techdocs/en_US/prisma/prisma-cloud/prisma-cloud-code-security-policy-reference/google-cloud-policies/google-cloud-networking-policies/ensure-gcp-google-compute-firewall-ingress-does-not-allow-unrestricted-access-to-all-ports.html
+
