@@ -14,6 +14,7 @@ pipeline {
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
         GOOGLE_PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
+        PATH = "/var/lib/jenkins/workspace/SWP391_HPH_System_main"
     }
 
     stages {
@@ -45,7 +46,7 @@ pipeline {
             agent {
                 docker {
                     image 'bridgecrew/checkov'
-                    args '--volume infrastructure/gcp/main:/tf --workdir /tf'
+                    args '--volume $PATH/infrastructure/gcp/main:/tf --workdir /tf'
                 }
             }
             steps {
