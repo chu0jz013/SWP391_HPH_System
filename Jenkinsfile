@@ -46,6 +46,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'ls -l ${pwd}/infrastructure/gcp/main'
                 stash(name: 'checkov-results.json', includes: '${pwd}/infrastructure/gcp/main/checkov_results.json')
                 scirpt {
                     sh 'ls -l ${pwd}/infrastructure/gcp/main'
