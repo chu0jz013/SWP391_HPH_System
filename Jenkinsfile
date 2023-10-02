@@ -20,13 +20,12 @@ pipeline {
             }
         }
 
-        // stage('Get gclod credentials') {
-        //     steps {
-        //         sh 'gcloud --version'
-        //         sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
-        //         sh 'gcloud compute zones list'
-        //     }
-        // }
+        stage('Get gclod credentials') {
+            steps {
+                sh 'gcloud --version'
+                sh 'gcloud auth application-default login --client-id-file=$GCLOUD_CREDS'
+            }
+        }
 
         stage('Terraform Plan') {
             steps {
@@ -34,7 +33,6 @@ pipeline {
                 // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 sh 'pwd'
                 sh 'ls -l'
-                // sh 'gcloud storage buckets list --project=${PROJECT_ID}'
                 sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
             }
         }
@@ -42,7 +40,6 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 sh 'gcloud --version'
-                // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 input message: 'Deploy infrastructure?', ok: 'Deploy'
                 sh 'bash infrastructure/script/run.sh ${ENV_SYSTEM}'
             }
@@ -51,7 +48,6 @@ pipeline {
         stage('Terraform Destroy') {
             steps {
                 sh 'gcloud --version'
-                // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 input message: 'Destroy infrastructure?', ok: 'Destroy'
                 sh 'bash infrastructure/script/destroy.sh ${ENV_SYSTEM}'
             }
