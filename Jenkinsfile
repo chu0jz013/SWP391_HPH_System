@@ -61,8 +61,8 @@ pipeline {
                 }
             }
         }
-
-        post {
+    }
+    post {
             failure {
                 emailext(
                     subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
@@ -70,6 +70,5 @@ pipeline {
                     to: 'williamkieu2003@gmail.com'
                 )
             }
-        }
     }
 }
