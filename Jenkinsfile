@@ -34,7 +34,7 @@ pipeline {
                 //     }
                 // }
 
-                sh "gcloud auth application-default login --client-id-file=${GCLOUD_CREDS} --quiet"
+                sh "gcloud auth application-default login --client-id-file=$[GCLOUD_CREDS] --quiet"
                 sh 'gcloud auth application-default print-access-token'
             }
         }
