@@ -13,7 +13,7 @@ pipeline {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcloud-creds')
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
         GOOGLE_PROJECT_ID = 'knhfrdevops'
-        REGION = 'asia-east2'\
+        REGION = 'asia-east2'
     }
 
     stages {
@@ -44,7 +44,7 @@ pipeline {
             agent {
                 docker {
                     image 'bridgecrew/checkov'
-                    args "--volume ${pwd}/infrastructure/gcp/main/checkov_results.json:/tf --workdir /tf"
+                    args "--volume ${pwd}:/tf --workdir /tf"
                 }
             }
             steps {
