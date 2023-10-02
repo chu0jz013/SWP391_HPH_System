@@ -10,9 +10,8 @@ pipeline {
         REGION = 'asia-east2'
         // TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
-        GCLOUD_CREDS = credentials('gcloud-creds')
         FILE_PATH = '.credentials/gcloud-creds.json'
-        TEXT_TO_COPY = env.GCLOUD_CREDS
+        GCLOUD_CREDS = credentials('gcloud-creds')
     }
 
     stages {
@@ -28,7 +27,7 @@ pipeline {
 
                 script {
                     if (!fileExists($FILE_PATH)) {
-                        writeFile($FILE_PATH, TEXT_TO_COPY)
+                        writeFile($FILE_PATH, GCLOUD_CREDS)
                         echo "Text copied to $FILE_PATH"
                     }
                 }
