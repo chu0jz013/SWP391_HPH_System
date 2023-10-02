@@ -49,7 +49,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'checkov -f /tf/checkov_results.json'
+                    sh 'checkov -f /tf/infrastructure/gcp/main/checkov_results.json'
                 }
             }
         }
