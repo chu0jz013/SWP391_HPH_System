@@ -6,5 +6,5 @@
 *.tfstate
 *.tfstate.*
 
-*tfplan.binary
-*tfplan.json
+*checkov_results.binary
+*checkov_results.json
