@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        terraform "my-teraform-1.5.7"
+    }
+
     parameters {
         choice(name: 'ENV_SYSTEM', choices: ['sit', 'prod'], description: 'Select the environment')
         string(name: 'GOOGLE_CLOUD_KEYFILE_JSON', defaultValue: 'gcloud-creds', description: 'Google Cloud Service Account JSON Key')
