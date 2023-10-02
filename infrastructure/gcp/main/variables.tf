@@ -16,6 +16,6 @@ variable "file_name" {
   description = "The lab variable file to run"
 }
 
-variable "credentials_file_path" {
+# variable "credentials_file_path" {
  
-}
+# }

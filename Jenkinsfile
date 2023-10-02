@@ -6,10 +6,11 @@ pipeline {
     }
 
     environment {
-        PROJECT_ID = 'knhfrdevops'
+        GOOGLE_PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
         ENV_SYSTEM = 'sit'
-        GCLOUD_CREDS = credentials('gcloud-creds')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcloud-creds')
+        GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
     }
 
     stages {
@@ -22,7 +23,7 @@ pipeline {
         stage('Get gclod credentials') {
             steps {
                 sh 'gcloud --version'
-                // sh 'gcloud auth application-default login --client-id-file=$GCLOUD_CREDS --quiet'
+            // sh 'gcloud auth application-default login --client-id-file=$GCLOUD_CREDS --quiet'
             }
         }
 
