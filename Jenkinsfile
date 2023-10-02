@@ -44,23 +44,22 @@ pipeline {
             agent {
                 docker {
                     image 'bridgecrew/checkov'
+                    args "--volume ${pwd}:/tf --workdir /tf"
                 }
             }
             steps {
-                stash(name: 'checkov-results.json', includes: '${pwd}/infrastructure/gcp/main/checkov_results.json')
-                scirpt {
-                    sh 'unstash "checkov-results.json"'
-                    sh 'checkov -f checkov_results.json'
+                script {
+                    sh 'checkov -f /tf/checkov_results.json'
                 }
             }
         }
 
-        // stage('Terraform Scan with TFsec') {
+        // stage('Terraform Scan with Checkov') {
         //     steps {
         //         // sh 'docker run --tty --rm --volume -v "$(pwd):/src" aquasec/tfsec /src'
         //         sh 'docker run --tty --rm --volume ${pwd}:/tf --workdir /tf bridgecrew/checkov --directory /tf'
-        //         // sh 'go get install github.com/aquasecurity/tfsec/cmd/tfsec@latest'
-        //         // sh 'checkov -f checkov_results.json'
+        //     // sh 'go get install github.com/aquasecurity/tfsec/cmd/tfsec@latest'
+        //     // sh 'checkov -f checkov_results.json'
         //     }
         // }
 
