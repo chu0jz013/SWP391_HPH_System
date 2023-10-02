@@ -10,7 +10,7 @@ pipeline {
         REGION = 'asia-east2'
         // TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
-        GCLOUD_CREDS=credentials('gcloud-creds')
+        GCLOUD_CREDS = credentials('gcloud-creds')
     }
 
     stages {
@@ -20,28 +20,24 @@ pipeline {
             }
         }
 
-        stage('Get gclod credentials') {
+        stage('Get Google Cloud Credentials') {
             steps {
                 sh 'gcloud --version'
 
-                sh '#!/bin/bash
+                def file_path = '.credentials/gcloud-creds.json'
+                def text_to_copy = env.GCLOUD_CREDS
 
-                    file_path=".credentails/gcloud-creds.json"
-                    text_to_copy="${GCLOUD_CREDS}"
+                script {
+                    if (!fileExists(file_path)) {
+                        writeFile(file_path, text_to_copy)
+                        echo "Text copied to $file_path"
+                    }
+                }
 
-                    if [ ! -e "$file_path" ]; then
-                    # If the file doesn't exist, create it
-                    touch "$file_path"
-                    fi
-
-                    echo "$text_to_copy" > "$file_path"
-
-                    echo "Text copied to $file_path"'
-'
-
-                sh 'gcloud auth application-default login --client-id-file=$GCLOUD_CREDS.json --quiet'
+                sh "gcloud auth application-default login --client-id-file=$file_path --quiet"
                 sh 'gcloud auth application-default print-access-token'
             }
+
         }
 
         stage('Terraform Plan') {
