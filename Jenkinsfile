@@ -10,7 +10,6 @@ pipeline {
         REGION = 'asia-east2'
         ENV_SYSTEM = 'sit'
         FILE_PATH = '/var/lib/jenkins/creds/gcloud-creds.json'
-        GCLOUD_CREDS = credentials('gcloud-creds')
     }
 
     stages {
@@ -22,29 +21,31 @@ pipeline {
 
         stage('Get Google Cloud Credentials') {
             steps {
-                sh 'gcloud --version'
-
-                sh 'echo $GCLOUD_CREDS'
-
                 script {
-                    if (!fileExists(FILE_PATH)) {
-                        writeFile(FILE_PATH, GCLOUD_CREDS)
-                        echo "Text copied to $FILE_PATH"
-                    }
-                }
+                    // Retrieve Google Cloud credentials from Jenkins credentials
+                    def gcloudCreds = credentials('gcloud-creds')
 
-                sh "gcloud auth application-default login --client-id-file=$FILE_PATH --quiet"
-                sh 'gcloud auth application-default print-access-token'
+                    if (gcloudCreds == null) {
+                        error "Google Cloud credentials 'gcloud-creds' not found"
+                    }
+
+                    // Write the credentials to the specified file
+                    writeFile file: FILE_PATH, text: gcloudCreds
+                    echo "Google Cloud credentials copied to $FILE_PATH"
+                }
             }
         }
 
         stage('Terraform Plan') {
             steps {
                 sh 'gcloud --version'
-                sh 'gcloud auth application-default login  --key-file=$GCLOUD_CREDS.json --quiet'
+
+                // Authenticate using the credentials file
+                sh "gcloud auth application-default login --client-id-file=$FILE_PATH --quiet"
+
                 sh 'pwd'
                 sh 'ls -l'
-                sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
+                sh "bash infrastructure/script/plan.sh ${ENV_SYSTEM}"
             }
         }
 
@@ -52,7 +53,7 @@ pipeline {
             steps {
                 sh 'gcloud --version'
                 input message: 'Deploy infrastructure?', ok: 'Deploy'
-                sh 'bash infrastructure/script/run.sh ${ENV_SYSTEM}'
+                sh "bash infrastructure/script/run.sh ${ENV_SYSTEM}"
             }
         }
 
@@ -60,7 +61,7 @@ pipeline {
             steps {
                 sh 'gcloud --version'
                 input message: 'Destroy infrastructure?', ok: 'Destroy'
-                sh 'bash infrastructure/script/destroy.sh ${ENV_SYSTEM}'
+                sh "bash infrastructure/script/destroy.sh ${ENV_SYSTEM}"
             }
         }
     }
