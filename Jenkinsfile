@@ -13,7 +13,7 @@ pipeline {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcloud-creds')
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
         GOOGLE_PROJECT_ID = 'knhfrdevops'
-        REGION = 'asia-east2'
+        REGION = 'asia-east2'\
     }
 
     stages {
@@ -46,7 +46,7 @@ pipeline {
                 }
             }
             steps {
-                stash(name: 'checkov-results', includes: 'checkov_results.json')
+                stash(name: 'checkov-results', includes: 'infrastructure/gcp/main/checkov_results.json')
                 scirpt {
                     sh 'unstash "checkov-results"'
                     sh 'checkov -f checkov_results.json'
