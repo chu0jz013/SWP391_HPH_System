@@ -14,6 +14,7 @@ pipeline {
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
         GOOGLE_PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
+        TF_PROJECT_DIR = 'infrastructure/gcp/main'
     }
 
     stages {
@@ -40,10 +41,13 @@ pipeline {
         }
 
         stage('Terraform Scan with Checkov') {
+            agent {
+                docker {
+                    image 'bridgecrew/checkov'
+                }
+            }
             steps {
-                sh 'pip install checkov'
-                sh 'export PATH=~/.local/bin:$PATH'
-                sh 'checkov -f tfplan.json'
+                sh'docker run --tty --rm --volume ${TF_PROJECT_DIR}:/tf --workdir /tf bridgecrew/checkov --directory /tf --output json > checkov_results.json'
             }
         }
 
