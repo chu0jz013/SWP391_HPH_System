@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters {
-        choice(name: 'ENV_SYSTEM', choices: ['sit', 'uat', 'prod'], description: 'Select the environment')
+        choice(name: 'ENV_SYSTEM', choices: ['sit', 'prod'], description: 'Select the environment')
     }
 
     environment {
@@ -39,26 +39,26 @@ pipeline {
             }
         }
 
-        stage('Terraform Plan') {
-            steps {
-                script {
-                    try {
-                        sh 'gcloud --version'
-                        sh 'pwd'
-                        sh 'ls -l'
-                        sh "bash infrastructure/script/plan.sh ${params.ENV_SYSTEM}"
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        error("Terraform Plan failed: ${e.message}")
-                    }
-                }
-            }
-        }
-
         stage('Terraform Scan with Checkov') {
             steps {
                 sh 'pip install checkov'
                 sh 'checkov -f tfplan.json'
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    try {
+                        sh 'gcloud --version'
+                        sh "bash infrastructure/script/plan.sh ${params.ENV_SYSTEM}"
+                        input message: 'Deploy infrastructure?', ok: 'Deploy'
+                        sh "bash infrastructure/script/run.sh ${params.ENV_SYSTEM}"
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        error("Terraform Apply failed: ${e.message}")
+                    }
+                }
             }
         }
 
