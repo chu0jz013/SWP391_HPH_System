@@ -31,6 +31,7 @@ pipeline {
                         sh 'pwd'
                         sh 'ls -l'
                         sh "bash infrastructure/script/plan.sh ${params.ENV_SYSTEM}"
+                        sh 'cat ${pwd}/infrastructure/gcp/main/checkov_result.json'
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         error("Terraform Plan failed: ${e.message}")
@@ -46,10 +47,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'ls -l ${pwd}/infrastructure/gcp/main'
                 stash(name: 'checkov-results.json', includes: '${pwd}/infrastructure/gcp/main/checkov_results.json')
                 scirpt {
-                    sh 'ls -l ${pwd}/infrastructure/gcp/main'
                     sh 'unstash "checkov-results.json"'
                     sh 'checkov -f checkov_results.json'
                 }
