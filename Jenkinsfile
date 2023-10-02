@@ -2,15 +2,16 @@ pipeline {
     agent any
 
     tools {
-        terraform "my-terraform-1.5.7"
+        terraform 'my-terraform-1.5.7'
     }
 
     parameters {
         choice(name: 'ENV_SYSTEM', choices: ['sit', 'prod'], description: 'Select the environment')
-        string(name: 'GOOGLE_CLOUD_KEYFILE_JSON', defaultValue: 'gcloud-creds', description: 'Google Cloud Service Account JSON Key')
     }
 
     environment {
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcloud-creds')
+        GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
         GOOGLE_PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
     }
@@ -54,19 +55,19 @@ pipeline {
             }
         }
 
-        // stage('Terraform Destroy') {
-        //     steps {
-        //         script {
-        //             try {
-        //                 input message: 'Destroy infrastructure?', ok: 'Destroy'
-        //                 sh "bash infrastructure/script/destroy.sh ${params.ENV_SYSTEM}"
-        //             } catch (Exception e) {
-        //                 currentBuild.result = 'FAILURE'
-        //                 error("Terraform Destroy failed: ${e.message}")
-        //             }
-        //         }
-        //     }
-        // }
+    // stage('Terraform Destroy') {
+    //     steps {
+    //         script {
+    //             try {
+    //                 input message: 'Destroy infrastructure?', ok: 'Destroy'
+    //                 sh "bash infrastructure/script/destroy.sh ${params.ENV_SYSTEM}"
+    //             } catch (Exception e) {
+    //                 currentBuild.result = 'FAILURE'
+    //                 error("Terraform Destroy failed: ${e.message}")
+    //             }
+    //         }
+    //     }
+    // }
     }
 
     post {
