@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters {
-        choice(name: 'ENV_SYSTEM', choices: ['sit', 'prod'], description: 'Select the environment')
+        choice(name: 'ENV_SYSTEM', choices: ['sit', 'uat', 'prod'], description: 'Select the environment')
     }
 
     environment {
@@ -65,10 +65,10 @@ pipeline {
         post {
             failure {
                 emailext(
-                subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
-                body: "The Jenkins pipeline '${currentBuild.fullDisplayName}' has failed.",
-                to: 'williamkieu2003@gmail.com',
-            )
+                    subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
+                    body: "The Jenkins pipeline '${currentBuild.fullDisplayName}' has failed.",
+                    to: 'williamkieu2003@gmail.com'
+                )
             }
         }
     }
