@@ -51,6 +51,8 @@ pipeline {
             steps {
                 script {
                     // sh 'checkov -f /tf/checkov_results.json'
+                    sh 'pip3 install --upgrade checkov'
+                    sh 'pip install --upgrade attrs'
                     sh 'checkov --version'
                     sh 'checkov -f infrastructure/gcp/main/checkov_results.json'
                 }
