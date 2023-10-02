@@ -14,7 +14,6 @@ pipeline {
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
         GOOGLE_PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
-        PATH = ${ pwd }
     }
 
     stages {
