@@ -26,8 +26,10 @@ pipeline {
                 sh 'gcloud --version'
 
                 script {
-                    writeFile($FILE_PATH, GCLOUD_CREDS)
-                    echo "Text copied to $FILE_PATH"
+                    if (!fileExists(FILE_PATH)) {
+                        writeFile(FILE_PATH, GCLOUD_CREDS)
+                        echo "Text copied to $FILE_PATH"
+                    }
                 }
 
                 sh "gcloud auth application-default login --client-id-file=$FILE_PATH --quiet"
