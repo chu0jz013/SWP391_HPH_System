@@ -9,7 +9,6 @@ pipeline {
         PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
         ENV_SYSTEM = 'sit'
-        FILE_PATH = '/var/lib/jenkins/creds/gcloud-creds.json'
     }
 
     stages {
@@ -21,17 +20,10 @@ pipeline {
 
         stage('Get Google Cloud Credentials') {
             steps {
-                script {
-                    // Retrieve Google Cloud credentials from Jenkins credentials
-                    def gcloudCreds = credentials('gcloud-creds')
-
-                    if (gcloudCreds == null) {
-                        error "Google Cloud credentials 'gcloud-creds' not found"
-                    }
-
-                    // Write the credentials to the specified file
-                    writeFile file: FILE_PATH, text: gcloudCreds
-                    echo "Google Cloud credentials copied to $FILE_PATH"
+                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS_FILE')]) {
+                    sh "cp ${GCLOUD_CREDS_FILE} /tmp/gcloud-creds.json"
+                    echo 'Google Cloud credentials copied to /tmp/gcloud-creds.json'
+                    sh 'gcloud auth application-default login --client-id-file=/tmp/gcloud-creds.json --quiet'
                 }
             }
         }
@@ -41,7 +33,7 @@ pipeline {
                 sh 'gcloud --version'
 
                 // Authenticate using the credentials file
-                sh "gcloud auth application-default login --client-id-file=$FILE_PATH --quiet"
+                sh 'gcloud auth application-default login --client-id-file=/tmp/gcloud-creds.json --quiet'
 
                 sh 'pwd'
                 sh 'ls -l'
