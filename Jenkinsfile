@@ -10,7 +10,7 @@ pipeline {
         REGION = 'asia-east2'
         // TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
-        // GCLOUD_CREDS=credentials('gcloud-creds')
+        GCLOUD_CREDS=credentials('gcloud-creds')
     }
 
     stages {
@@ -23,14 +23,14 @@ pipeline {
         stage('Get gclod credentials') {
             steps {
                 sh 'gcloud --version'
-                // sh 'gcloud auth application-default login --client-id-file=$GCLOUD_CREDS'
+                sh 'gcloud auth application-default login --client-id-file=$GCLOUD_CREDS'
             }
         }
 
         stage('Terraform Plan') {
             steps {
                 sh 'gcloud --version'
-                // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
+                sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 sh 'pwd'
                 sh 'ls -l'
                 sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
