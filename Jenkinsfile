@@ -31,7 +31,7 @@ pipeline {
                         sh 'pwd'
                         sh 'ls -l'
                         sh "bash infrastructure/script/plan.sh ${params.ENV_SYSTEM}"
-                        sh 'cat infrastructure/gcp/main/checkov_result.json'
+                        sh 'cat ${pwd}/infrastructure/gcp/main/checkov_results.json'
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         error("Terraform Plan failed: ${e.message}")
