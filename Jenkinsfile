@@ -42,15 +42,17 @@ pipeline {
         }
 
         stage('Terraform Scan with Checkov') {
-            agent {
-                docker {
-                    image 'bridgecrew/checkov'
-                    args '--volume $TF_PATH:/tf --workdir /tf'
-                }
-            }
+            // agent {
+            //     docker {
+            //         image 'bridgecrew/checkov'
+            //         args '--volume $TF_PATH:/tf --workdir /tf'
+            //     }
+            // }
             steps {
                 script {
-                    sh 'checkov -f /tf/checkov_results.json'
+                    // sh 'checkov -f /tf/checkov_results.json'
+                    sh 'checkov --version'
+                    sh 'checkov -f infrastructure/gcp/main/checkov_results.json
                 }
             }
         }
@@ -90,3 +92,4 @@ pipeline {
             }
     }
 }
+
