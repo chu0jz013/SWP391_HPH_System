@@ -46,9 +46,9 @@ pipeline {
                 }
             }
             steps {
-                stash(name: 'checkov-results', includes: '${pwd}/infrastructure/gcp/main/checkov_results.json')
+                stash(name: 'checkov-results.json', includes: '${pwd}/infrastructure/gcp/main/checkov_results.json')
                 scirpt {
-                    sh 'unstash "checkov-results"'
+                    sh 'unstash "checkov-results.json"'
                     sh 'checkov -f checkov_results.json'
                 }
             }
