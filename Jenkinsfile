@@ -23,7 +23,7 @@ pipeline {
         stage('Get gclod credentials') {
             steps {
                 sh 'gcloud --version'
-                sh 'gcloud auth application-default login --client-id-file=$GCLOUD_CREDS'
+                sh 'gcloud auth application-default login --client-id-file=$GCLOUD_CREDS --quiet'
             }
         }
 
