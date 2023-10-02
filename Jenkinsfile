@@ -42,6 +42,7 @@ pipeline {
         stage('Terraform Scan with Checkov') {
             steps {
                 sh 'pip install checkov'
+                sh 'export PATH=~/.local/bin:$PATH'
                 sh 'checkov -f tfplan.json'
             }
         }
