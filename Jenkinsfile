@@ -52,7 +52,7 @@ pipeline {
                 script {
                     // sh 'checkov -f /tf/checkov_results.json'
                     sh 'checkov --version'
-                    sh 'checkov -f infrastructure/gcp/main/checkov_results.json
+                    sh 'checkov -f infrastructure/gcp/main/checkov_results.json'
                 }
             }
         }
