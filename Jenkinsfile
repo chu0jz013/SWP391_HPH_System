@@ -2,13 +2,12 @@ pipeline {
     agent any
 
     tools {
-        terraform 'my-terraform'
+        terraform 'my-terraform-1.5.7'
     }
 
     environment {
         PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
-        TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
         GCLOUD_CREDS = credentials('gcloud-creds')
     }
