@@ -41,11 +41,11 @@ pipeline {
         }
 
         stage('Terraform Scan with Checkov') {
-            agent {
-                docker {
-                    image 'bridgecrew/checkov'
-                }
-            }
+            // agent {
+            //     docker {
+            //         image 'bridgecrew/checkov'
+            //     }
+            // }
             steps {
                 sh'docker run --tty --rm --volume ${TF_PROJECT_DIR}:/tf --workdir /tf bridgecrew/checkov --directory /tf --output json > checkov_results.json'
             }
