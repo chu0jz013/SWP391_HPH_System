@@ -12,7 +12,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file(var.credentials_file_path)
+  # credentials = file(var.credentials_file_path)
   project = "knhfrdevops"
   region  = "asia-east2"
   zone    = "asia-east2-a"

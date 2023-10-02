@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     tools {
-        terraform 'my-terraform'
+        terraform 'my-terraform-1.5.7'
     }
 
     environment {
         PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
-        TERRAFORM_VERSION = '1.5.7'
+        // TERRAFORM_VERSION = '1.5.7'
         ENV_SYSTEM = 'sit'
-        GCLOUD_CREDS=credentials('gcloud-creds')
+        // GCLOUD_CREDS=credentials('gcloud-creds')
     }
 
     stages {
@@ -34,7 +34,7 @@ pipeline {
                 // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 sh 'pwd'
                 sh 'ls -l'
-                sh 'gcloud storage buckets list --project=${PROJECT_ID}'
+                // sh 'gcloud storage buckets list --project=${PROJECT_ID}'
                 sh 'bash infrastructure/script/plan.sh ${ENV_SYSTEM}'
             }
         }
@@ -42,7 +42,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 sh 'gcloud --version'
-                sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
+                // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 input message: 'Deploy infrastructure?', ok: 'Deploy'
                 sh 'bash infrastructure/script/run.sh ${ENV_SYSTEM}'
             }
@@ -51,7 +51,7 @@ pipeline {
         stage('Terraform Destroy') {
             steps {
                 sh 'gcloud --version'
-                sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
+                // sh 'gcloud auth activate-service-account --key-file=$GCLOUD_CREDS'
                 input message: 'Destroy infrastructure?', ok: 'Destroy'
                 sh 'bash infrastructure/script/destroy.sh ${ENV_SYSTEM}'
             }
