@@ -1,10 +1,11 @@
 module "vpc" {
-  source                 = "../modules/vpc"
-  for_each               = try(local.configuration.network, {})
-  name                   = try(each.value.name, null)
-  subnet_ip_cidr_range   = try(each.value.subnet_ip_cidr_range, null)
-  firewall_source_ranges = try(each.value.firewall_source_ranges, null)
-  firewall_protocol      = try(each.value.firewall_protocol, null)
+  source                   = "../modules/vpc"
+  for_each                 = try(local.configuration.network, {})
+  name                     = try(each.value.name, null)
+  subnet_ip_cidr_range     = try(each.value.subnet_ip_cidr_range, null)
+  firewall_source_ranges   = try(each.value.firewall_source_ranges, null)
+  firewall_protocol        = try(each.value.firewall_protocol, null)
+  private_ip_google_access = try(each.value.private_ip_google_access, null)
 }
 
 

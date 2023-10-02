@@ -5,10 +5,11 @@ locals {
     ##########################
     network = {
       vpc = {
-        name                   = "${local.prefix_name}-sit"
-        subnet_ip_cidr_range   = "10.0.0.0/24"
-        firewall_source_ranges = ["0.0.0.0/0"]
-        firewall_protocol      = "all"
+        name                     = "${local.prefix_name}-sit"
+        subnet_ip_cidr_range     = "10.0.0.0/24"
+        firewall_source_ranges   = ["0.0.0.0/0"]
+        firewall_protocol        = "all"
+        private_ip_google_access = true
       }
     }
 

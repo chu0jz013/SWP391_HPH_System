@@ -4,9 +4,10 @@ resource "google_compute_network" "this" {
 }
 
 resource "google_compute_subnetwork" "this" {
-  name          = "${var.name}-subnet"
-  network       = google_compute_network.this.self_link
-  ip_cidr_range = var.subnet_ip_cidr_range # Specify the CIDR range for your subnet
+  name                     = "${var.name}-subnet"
+  network                  = google_compute_network.this.self_link
+  ip_cidr_range            = var.subnet_ip_cidr_range
+  private_ip_google_access = var.private_ip_google_access
 }
 
 resource "google_compute_firewall" "this" {
