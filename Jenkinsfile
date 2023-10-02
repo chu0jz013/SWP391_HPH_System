@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'gcloud --version'
+                        // sh 'gcloud --version'
                         sh 'pwd'
                         sh 'ls -l'
                         sh "bash infrastructure/script/plan.sh ${params.ENV_SYSTEM}"
