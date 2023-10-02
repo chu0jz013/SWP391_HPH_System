@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        terraform "my-teraform-1.5.7"
+        terraform "my-terraform-1.5.7"
     }
 
     parameters {
