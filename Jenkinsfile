@@ -14,7 +14,6 @@ pipeline {
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
         GOOGLE_PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
-        // TF_PATH = '/var/lib/jenkins/workspace/SWP391_HPH_System_main/infrastructure/gcp/main'
     }
 
     stages {
@@ -45,14 +44,12 @@ pipeline {
             steps {
                 script {
                     try {
-                        // sh 'pip3 install --upgrade checkov'
-                        // sh 'pip install --upgrade attrs'
-                        sh 'checkov --version'
+                                    sh 'checkov --version'
                         sh 'checkov -f infrastructure/gcp/main/checkov_results.json'
                     } catch (Exception e) {
                         // currentBuild.result = 'FAILURE'
                         // error("Scan with Checkov failed: ${e.message}")
-                        sh 'echo fail'scan with checkout fail''
+                        sh 'echo fail'
                     }
                 }
             }

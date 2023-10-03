@@ -41,7 +41,7 @@ sudo chmod 777 /var/run/docker.sock
 ##########################
 ## install sonarQube
 ##########################
-sudo docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube
+sudo docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 --restart unless-stopped sonarqube
 
 ##########################
 ## install helm chart
