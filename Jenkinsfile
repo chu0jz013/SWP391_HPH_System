@@ -45,11 +45,10 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'pip3 install --upgrade checkov'
-                        sh 'pip install --upgrade attrs'
-                        sh 'export PATH="$HOME/.local/bin:$PATH"'
-                        sh '/home/haikn/.local/bin/checkov --version'
-                        sh '/home/haikn/.local/bin/checkov -f infrastructure/gcp/main/checkov_results.json'
+                        // sh 'pip3 install --upgrade checkov'
+                        // sh 'pip install --upgrade attrs'
+                        sh 'checkov --version'
+                        sh 'checkov -f infrastructure/gcp/main/checkov_results.json'
                     } catch (Exception e) {
                         // currentBuild.result = 'FAILURE'
                         // error("Scan with Checkov failed: ${e.message}")
