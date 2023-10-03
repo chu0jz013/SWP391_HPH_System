@@ -24,8 +24,8 @@ locals {
         metadata_startup_script = file("../user_data/install_jenkins.sh")
         tags                    = ["jenkins-tag"]
         zone                    = "asia-east2-a"
-        machine_type            = "e2-highcpu-8"
-        disk_size               = "15"
+        machine_type            = "e2-standard-2"
+        disk_size               = "30"
         spot                    = true
       }
     }
