@@ -52,10 +52,13 @@ sudo chmod 700 get_helm.sh
 ./get_helm.sh
 
 ##########################
-## install pip
+## install checkov
 ##########################
 
 sudo apt install pip -y
+pip install checkov
+export PATH="$HOME/.local/bin:$PATH"
+
 
 ##########################
 ## install trivy
