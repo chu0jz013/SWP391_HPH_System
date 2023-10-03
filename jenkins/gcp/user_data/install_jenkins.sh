@@ -56,7 +56,7 @@ sudo chmod 700 get_helm.sh
 ##########################
 
 sudo apt install pip -y
-pip install checkov
+pip install --upgrade checkov
 export PATH="$HOME/.local/bin:$PATH"
 
 

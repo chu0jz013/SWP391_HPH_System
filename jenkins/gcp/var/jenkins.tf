@@ -25,7 +25,7 @@ locals {
         tags                    = ["jenkins-tag"]
         zone                    = "asia-east2-a"
         machine_type            = "e2-standard-2"
-        disk_size               = "30"
+        disk_size               = "25"
         spot                    = true
       }
     }
