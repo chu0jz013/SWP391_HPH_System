@@ -50,6 +50,8 @@ pipeline {
                         sh 'checkov --version'
                         sh 'checkov -f infrastructure/gcp/main/checkov_results.json'
                     } catch (Exception e) {
+                        // currentBuild.result = 'FAILURE'
+                        error("Scan with Checkov failed: ${e.message}")
                     }
                 }
             }
@@ -63,6 +65,19 @@ pipeline {
                         sh "bash infrastructure/script/plan.sh ${params.ENV_SYSTEM}"
                         input message: 'Deploy infrastructure?', ok: 'Deploy'
                         sh "bash infrastructure/script/run.sh ${params.ENV_SYSTEM}"
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        error("Terraform Apply failed: ${e.message}")
+                    }
+                }
+            }
+        }
+
+        stage('Apply Kubernetes Config') {
+            steps {
+                script {
+                    try {
+                        
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         error("Terraform Apply failed: ${e.message}")
