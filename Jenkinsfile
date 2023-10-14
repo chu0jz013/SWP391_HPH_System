@@ -12,8 +12,13 @@ pipeline {
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcloud-creds')
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcloud-creds')
-        GOOGLE_PROJECT_ID = 'knhfrdevops'
         REGION = 'asia-east2'
+        DOCKER_IMAGE_NAME = 'quachuoiscontainer/hph_be'
+        DOCKER_IMAGE_TAG = "${BUILD_NUMBER}"
+        CLUSTER_NAME = "haikn2-cicd-${BUILD_ENV}-cluster"
+        PROJECT_ID = 'knhfrdevops'
+        LOCATION = 'asia-east2-a'
+        NAMESPACE = 'hph'
     }
 
     stages {
@@ -44,7 +49,7 @@ pipeline {
             steps {
                 script {
                     try {
-                                    sh 'checkov --version'
+                        sh 'checkov --version'
                         sh 'checkov -f infrastructure/gcp/main/checkov_results.json'
                     } catch (Exception e) {
                         // currentBuild.result = 'FAILURE'
