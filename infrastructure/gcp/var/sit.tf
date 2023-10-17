@@ -20,10 +20,10 @@ locals {
     cluster = {
       gke = {
         name               = "${local.prefix_name}-sit"
-        machine_type       = "e2-medium"
-        disk_size          = 12
+        machine_type       = "e2-small"
+        disk_size          = 10
         min_count          = 1
-        max_count          = 5
+        max_count          = 3
         initial_node_count = 1
       }
     }
